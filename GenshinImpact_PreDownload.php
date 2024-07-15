@@ -22,7 +22,7 @@ curl_close($curl);
 $preDownload = $ResponcURL['data']['game_packages'][0]['pre_download'];
 $patches = $preDownload['patches'];
 
-// Inisialisasi array untuk URL, versi, dan ukuran dari predownload dan patch
+// Inisialisasi array untuk URL, versi, ukuran, dan bahasa dari predownload dan patch
 $preDownloadFiles = [];
 $patchFiles = [];
 
@@ -38,29 +38,32 @@ function formatSize($size) {
     }
 }
 
-// Mendapatkan URL, versi, dan ukuran dari predownload game_pkgs
+// Mendapatkan URL, versi, ukuran, dan bahasa dari predownload game_pkgs
 foreach ($preDownload['major']['game_pkgs'] as $game_pkg) {
     $preDownloadFiles[] = [
         'version' => $preDownload['major']['version'],
+        'language' => 'N/A', // Karena ini adalah game package, tidak ada bahasa
         'url' => $game_pkg['url'],
         'size' => formatSize($game_pkg['size'])
     ];
 }
 
-// Mendapatkan URL dan ukuran dari predownload audio_pkgs
+// Mendapatkan URL, versi, ukuran, dan bahasa dari predownload audio_pkgs
 foreach ($preDownload['major']['audio_pkgs'] as $audio_pkg) {
     $preDownloadFiles[] = [
         'version' => $preDownload['major']['version'],
+        'language' => $audio_pkg['language'],
         'url' => $audio_pkg['url'],
         'size' => formatSize($audio_pkg['size'])
     ];
 }
 
-// Mendapatkan URL, versi, dan ukuran dari patch game_pkgs dan audio_pkgs
+// Mendapatkan URL, versi, ukuran, dan bahasa dari patch game_pkgs dan audio_pkgs
 foreach ($patches as $patch) {
     foreach ($patch['game_pkgs'] as $game_pkg) {
         $patchFiles[] = [
             'version' => $patch['version'],
+            'language' => 'N/A', // Karena ini adalah game package, tidak ada bahasa
             'url' => $game_pkg['url'],
             'size' => formatSize($game_pkg['size'])
         ];
@@ -69,6 +72,7 @@ foreach ($patches as $patch) {
     foreach ($patch['audio_pkgs'] as $audio_pkg) {
         $patchFiles[] = [
             'version' => $patch['version'],
+            'language' => $audio_pkg['language'],
             'url' => $audio_pkg['url'],
             'size' => formatSize($audio_pkg['size'])
         ];
@@ -79,6 +83,7 @@ foreach ($patches as $patch) {
 echo "PreDownload:\n";
 foreach ($preDownloadFiles as $file) {
     echo "Version: " . $file['version'] . "\n";
+    echo "Language: " . $file['language'] . "\n";
     echo "URL: " . $file['url'] . "\n";
     echo "Size: " . $file['size'] . "\n\n";
 }
@@ -87,6 +92,7 @@ foreach ($preDownloadFiles as $file) {
 echo "PATCH:\n";
 foreach ($patchFiles as $file) {
     echo "Version: " . $file['version'] . "\n";
+    echo "Language: " . $file['language'] . "\n";
     echo "URL: " . $file['url'] . "\n";
     echo "Size: " . $file['size'] . "\n\n";
 }
