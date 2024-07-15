@@ -142,7 +142,7 @@ if ($preDownload) {
 
 // Menampilkan array predownload jika ada
 if (!empty($preDownloadFiles)) {
-    echo "PreDownload:\n";
+    echo "PreDownload Version:\n";
     foreach ($preDownloadFiles as $file) {
         echo "Version: " . $file['version'] . "\n";
         echo "Language: " . $file['language'] . "\n";
@@ -153,7 +153,7 @@ if (!empty($preDownloadFiles)) {
 }
 
 // Menampilkan array main
-echo "Main:\n";
+echo "Latest Version in Game:\n";
 foreach ($mainFiles as $file) {
     echo "Version: " . $file['version'] . "\n";
     echo "Language: " . $file['language'] . "\n";
