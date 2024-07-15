@@ -1,2 +1,2 @@
-# HoYo-Games-Repository
-API's HoYo Games
+# HoYo Games API Response
+API's HoYo Games for New HoyoLauncher
