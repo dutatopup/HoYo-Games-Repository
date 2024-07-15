@@ -1,3 +1,6 @@
+<?php
+header('Content-Type: application/json');
+
 $curl = curl_init();
 
 curl_setopt_array(
